@@ -23,6 +23,14 @@ func Abs(a int) int {
 	return a
 }
 
+func Between(value, min, max int) bool {
+	return value > min && value < max
+}
+
+func BetweenInclusive(value, min, max int) bool {
+	return value >= min && value <= max
+}
+
 func SliceMax(array []int) int {
 	var max int = 0
 	for _, v := range array {
