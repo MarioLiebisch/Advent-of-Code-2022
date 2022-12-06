@@ -22,3 +22,21 @@ func GetCommonChars(a, b string) string {
 	}
 	return string(ret)
 }
+
+func HasDuplicateChars(text string) bool {
+	return len(GetUniqueChars(text)) != len(text)
+}
+
+func GetUniqueChars(text string) string {
+	counts := map[rune]int{}
+	for _, r := range text {
+		counts[r]++
+	}
+	var res []rune
+	for r, c := range counts {
+		if c == 1 {
+			res = append(res, r)
+		}
+	}
+	return string(res)
+}
