@@ -18,3 +18,11 @@ func ParseRange(text string) (int, int) {
 	}
 	return v2, v1
 }
+
+func ToIntSlice(input []string) []int {
+	res := make([]int, len(input))
+	for i, v := range input {
+		res[i], _ = strconv.Atoi(v)
+	}
+	return res
+}
