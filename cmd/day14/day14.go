@@ -9,7 +9,6 @@ func solve1(file string) int {
 	c := cave.Read(file)
 	for c.DropSand(false) {
 	}
-	c.Print()
 	return c.CountSand()
 }
 
@@ -17,7 +16,6 @@ func solve2(file string) int {
 	c := cave.Read(file)
 	for c.DropSand(true) {
 	}
-	c.Print()
 	return c.CountSand()
 }
 
