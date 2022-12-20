@@ -1,16 +1,23 @@
 package main
 
+import "aoc2022/pkg/encryption"
+
 const sample = "./data/sample-20.txt"
 const input = "./data/input-20.txt"
 
 func solve1(file string) int {
-	var res = 0
-	return res
+	f := encryption.ReadFile(file)
+	f.Mix()
+	return f.GetGroveCoordinates()
 }
 
 func solve2(file string) int {
-	var res = 0
-	return res
+	f := encryption.ReadFile(file)
+	f.ApplyKey(811589153)
+	for i := 0; i < 10; i++ {
+		f.Mix()
+	}
+	return f.GetGroveCoordinates()
 }
 
 func main() {
