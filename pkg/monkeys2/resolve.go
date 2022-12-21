@@ -8,24 +8,16 @@ func (ms *Monkeys) Resolve(name string) int {
 	}
 	// Calculate this monkey's number and cache/return it
 	switch m.op {
-	case Add:
+	case Add: // result = op1 + op2
 		m.number = ms.Resolve(m.op1) + ms.Resolve(m.op2)
-		m.op = None
-		return m.number
-	case Sub:
+	case Sub: // result = op1 - op2
 		m.number = ms.Resolve(m.op1) - ms.Resolve(m.op2)
-		m.op = None
-		return m.number
-	case Mul:
+	case Mul: // result = op1 * op2
 		m.number = ms.Resolve(m.op1) * ms.Resolve(m.op2)
-		m.op = None
-		return m.number
-	case Div:
+	case Div: // result = op1 / op2
 		m.number = ms.Resolve(m.op1) / ms.Resolve(m.op2)
-		m.op = None
-		return m.number
 	}
-	// Shouldn't ever happen
+	m.op = None
 	return m.number
 }
 
@@ -37,23 +29,23 @@ func (ms *Monkeys) ResolveReversed(name string) int {
 			continue
 		}
 		if m.op1 == name {
-			// Solve the first operand the regular way
+			// Solve the second operand the regular way
 			other := ms.Resolve(m.op2)
 			if n == "root" {
-				// This is root, expected result is the other value
+				// This is root, so first operand is the same
 				return other
 			} else {
 				// Get the expected result for this monkey
 				result := ms.ResolveReversed(n)
-				// Reverse the operation and return the other operand
+				// Reverse the operation and return the first operand
 				switch m.op {
-				case Add:
+				case Add: // result = x + other
 					return result - other
-				case Sub:
+				case Sub: // result = x - other
 					return result + other
-				case Mul:
+				case Mul: // result = x * other
 					return result / other
-				case Div:
+				case Div: // result = x / other
 					return result * other
 				}
 			}
@@ -62,20 +54,20 @@ func (ms *Monkeys) ResolveReversed(name string) int {
 			// Solve the first operand the regular way
 			other := ms.Resolve(m.op1)
 			if n == "root" {
-				// This is root, expected result is the other value
+				// This is root, so second operand is the same
 				return other
 			} else {
 				// Get the expected result for this monkey
 				result := ms.ResolveReversed(n)
-				// Reverse the operation and return the other operand
+				// Reverse the operation and return the second operand
 				switch m.op {
-				case Add:
+				case Add: // result = other + x
 					return result - other
-				case Sub:
+				case Sub: // result = other - x
 					return other - result
-				case Mul:
+				case Mul: // result = other * x
 					return result / other
-				case Div:
+				case Div: // result = other / x
 					return other / result
 				}
 			}
